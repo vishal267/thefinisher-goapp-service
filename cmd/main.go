@@ -3,8 +3,8 @@ package main
 import (
     "log"
     "net/http"
-    "github.com/thefinisher/thefinisher-goapp/internal/config"
-    "github.com/thefinisher/thefinisher-goapp/internal/handlers"
+        "github.com/vishal267/thefinisher-goapp-service/internal/handlers"
+    "github.com/vishal267/thefinisher-goapp-service/internal/config"
 )
 
 func main() {

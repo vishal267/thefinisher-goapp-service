@@ -3,7 +3,7 @@ package handlers
 import (
     "net/http"
     "github.com/gorilla/mux"
-    "thefinisher-goapp/internal/services"
+     "github.com/vishal267/thefinisher-goapp-service/internal/services"
 )
 
 func SetupRouter() *mux.Router {

@@ -1,6 +1,6 @@
 package services
 
-import "thefinisher-goapp/internal/models"
+import "github.com/vishal267/thefinisher-goapp-service/internal/models"
 
 var users = []models.User{
     {ID: "1", Name: "Alice"},
