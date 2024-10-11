@@ -27,7 +27,12 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_TAG }}:latest
+        tags: |
+          ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_TAG }}:latest
+          ${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_TAG }}:${{ github.sha }}  # Add commit SHA as tag
+        cache-from: type=registry, ref=${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_TAG }}:cache
+        cache-to: type=registry, ref=${{ env.DOCKER_USERNAME }}/${{ env.IMAGE_TAG }}:cache, mode=max  # Use caching
+
 
     - name: Cleanup
       run: docker system prune -f
