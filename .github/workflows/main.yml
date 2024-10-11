@@ -32,3 +32,43 @@ jobs:
           
     - name: Cleanup
       run: docker system prune -f
+
+  update:
+    name: Update Helm Manifests
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+    - name: Check out code (Application Repo)
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 1
+
+    - name: Check out Helm Chart Repo
+      uses: actions/checkout@v2
+      with:
+        repository: vishal267/thefinisher-app-manifests
+        path: goapp-service 
+
+    - name: Update Image Tag in Helm Chart
+      run: |
+        chart_dir="goapp-service" 
+        new_image_tag=${{ github.sha }}
+
+        # Update image tag in values.yaml
+        sed -i "s/^  tag: .*/  tag: $new_image_tag/" "$chart_dir/values.yaml"
+
+    - name: Check for Changes
+      id: changes
+      run: |
+        git diff --quiet && echo "No changes to commit" || echo "Changes detected"
+
+    - name: Commit and Push Changes to Helm Chart Repo
+      if: steps.changes.outputs.result == 'Changes detected'
+      run: |
+        git config --global user.name 'thefinisher'
+        git config --global user.email 'thefinisher@gmail.com'
+        git add goapp-service/values.yaml
+        git commit -m "Update image tag to ${{ github.sha }}"
+        git push
+
