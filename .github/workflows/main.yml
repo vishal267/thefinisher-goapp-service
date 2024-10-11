@@ -55,6 +55,10 @@ jobs:
         chart_dir=goapp-service
         new_image_tag=${{ github.sha }}
 
+        # List files before updating values.yaml
+        echo "Listing files before updating values.yaml:"
+        ls -la "$chart_dir"
+
         # Update image tag in values.yaml
         sed -i "s/^  tag: .*/  tag: $new_image_tag/" "$chart_dir/values.yaml"
 
