@@ -33,7 +33,6 @@ jobs:
         tags: |
           ${{ env.IMAGE_NAME }}:${{ github.sha }}
           ${{ env.IMAGE_NAME }}:latest
-        cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:latest
 
   update:
     name: Update Helm Manifests
