@@ -52,7 +52,7 @@ jobs:
 
     - name: Update Image Tag in Helm Chart
       run: |
-        chart_dir=goapp-service
+        chart_dir=goapp-service/goapp-service
         new_image_tag=${{ github.sha }}
 
         # List files before updating values.yaml
