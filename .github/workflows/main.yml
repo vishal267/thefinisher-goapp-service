@@ -34,7 +34,6 @@ jobs:
           ${{ env.IMAGE_NAME }}:${{ github.sha }}
           ${{ env.IMAGE_NAME }}:latest
         cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:latest
-        cache-to: type=registry,ref=${{ env.IMAGE_NAME }}:cache,mode=max
 
   update:
     name: Update Helm Manifests
