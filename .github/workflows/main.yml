@@ -52,10 +52,11 @@ jobs:
 
     - name: Update Image Tag in Helm Chart
       run: |
+        chart_dir=goapp-service
         new_image_tag=${{ github.sha }}
 
         # Update image tag in values.yaml
-        sed -i "s/^  tag: .*/  tag: $new_image_tag/" "values.yaml"
+        sed -i "s/^  tag: .*/  tag: $new_image_tag/" "$chart_dir/values.yaml"
 
     - name: Check for Changes
       id: changes
